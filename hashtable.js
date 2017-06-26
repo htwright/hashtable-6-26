@@ -116,26 +116,59 @@ hashArray.forEach(object => {
 
 function checkPlaindrome (string) {
   const letterCount = {};
+  const hm = new HashMap();
+  let counts = [];
   let sum = 0;
   let letter;
+
   for(let i = 0; i < string.length; i++){
     letter = string[i];
-    if(letterCount[letter] > 0){
-      letterCount[letter]++;
+    if(hm.get(letter) === undefined){
+      hm.set(letter, 1);
+      letters.push(letter);
     } else {
-      letterCount[letter] = 1;
+      let count = hm.get(letter);
+      hm.set(letter, count+1);
     }
   }
-  for (let count in letterCount){
-    let x = letterCount[count];
-    if(x % 2 !== 0){
+
+  for(let i = 0; i < string.length; i++){
+    counts.push(hm.get(string[i]));
+  }
+  
+  for(let i = 0; i < counts.legnth; i++){
+    if (counts[i] % 2 !== 0){
       sum ++;
     }
   }
+
   if(sum > 1){
     return false;
   } else {
     return true;
   }
+
+
+  // for(let i = 0; i < string.length; i++){
+  //   letter = string[i];
+  //   if(letterCount[letter] > 0){
+  //     letterCount[letter]++;
+  //   } else {
+  //     letterCount[letter] = 1;
+  //   }
+  // }
+
+
+  // for (let count in letterCount){
+  //   let x = letterCount[count];
+  //   if(x % 2 !== 0){
+  //     sum ++;
+  //   }
+  // }
+  // if(sum > 1){
+  //   return false;
+  // } else {
+  //   return true;
+  // }
 }
 console.log(checkPlaindrome(''));
