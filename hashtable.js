@@ -125,3 +125,37 @@ function checkPlaindrome (string) {
 
 }
 console.log(checkPlaindrome('racecar'));
+
+function anagrams (arr) {
+  let results = {};
+  let arr2 = arr.map(str => {
+    return(str.split('').sort().join(''));
+  });
+  console.log(arr[2] + '   ' + arr2[2]);
+  for(let string of arr2){
+    results[string] = [];
+  }
+  for(let [index, string] of arr2.entries()){
+    console.log(string);
+    if(results[string].length > 0){
+      results[string].push(arr[index]);
+    } else {
+      results[string].push(arr[index]);
+    }
+  }
+  console.log(results);
+  let returnArr = [];
+  for(let key in results){
+    let newArr = [];
+    console.log(results);
+    console.log(results[key]);
+    for(let i = 0; i < results[key].length; i++){
+      newArr.push(results[key][i]);
+    }
+    returnArr.push(newArr);
+  }
+  
+  return returnArr;
+}
+
+console.log(anagrams(['hello', 'olleh', 'dad', 'add', 'racecar', 'carcrae', 'mom', 'omm']));
