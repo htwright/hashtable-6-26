@@ -91,7 +91,6 @@ let hashTable = new HashMap();
 hashArray.forEach(object => {
   let x = Object.keys(object).toString();
   hashTable.set(x, object[x]);
-//   console.log(hashTable);
 });
 
 function checkPlaindrome (string) {
@@ -131,24 +130,19 @@ function anagrams (arr) {
   let arr2 = arr.map(str => {
     return(str.split('').sort().join(''));
   });
-  console.log(arr[2] + '   ' + arr2[2]);
   for(let string of arr2){
     results[string] = [];
   }
   for(let [index, string] of arr2.entries()){
-    console.log(string);
     if(results[string].length > 0){
       results[string].push(arr[index]);
     } else {
       results[string].push(arr[index]);
     }
   }
-  console.log(results);
   let returnArr = [];
   for(let key in results){
     let newArr = [];
-    console.log(results);
-    console.log(results[key]);
     for(let i = 0; i < results[key].length; i++){
       newArr.push(results[key][i]);
     }
