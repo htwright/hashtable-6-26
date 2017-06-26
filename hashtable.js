@@ -1,3 +1,86 @@
+class LinkedList {
+  constructor() {
+    this.length = 0;
+    this.head = null;
+    this.tail = null;
+  }
+
+  insert(index, data) {
+    let node = {
+      data: '',
+      next: null
+    };
+    node.data = data;
+    if (index === 0) {
+      this.head = node;
+    } else if (index === this.length) {
+      this.tail = this.get(this.length - 1);
+      this.tail.next = node;
+      this.tail = node;
+    } else if (index > 0 && index < this.length) {
+      let prevNode = this.get(index - 1);
+      node.next = prevNode.next;
+      prevNode.next = node;
+    }
+    this.length++;
+  }
+
+  delete(index) {
+    //remove an element from the linked list
+    let prevNode = null;
+    let nextNode = null;
+    if (index - 1 >= 0) {
+      prevNode = this.get(index - 1);
+      if (index + 1 < this.length) {
+        nextNode = this.get(index + 1);
+      }
+      prevNode.next = nextNode;
+      this.tail = prevNode;
+      this.length--;
+    } else if (index === 0 && this.length > 0) {
+      this.head = this.get(index + 1);
+      this.length--;
+    } else {
+      console.log("Something's wrong with your request, comrade.");
+    }
+
+  }
+
+  _find(index) {
+    let node = this.head;
+    for (let i = 0; i < index; i++) {
+      node = node.next;
+    }
+    return node;
+  }
+
+  get(index) {
+    if (index < 0 || index > this.length - 1) {
+      return undefined;
+
+    } else {
+      return this._find(index);
+    }
+  }
+
+  getData(index) {
+    if (index < 0 || index > this.length - 1) {
+      return console.log("Stuff's broke, yo.");
+    } else {
+      return this._find(index).data;
+    }
+  }
+  display() {
+    let data = '';
+    for (let i = 0; i < this.length; i++) {
+      data += this.getData(i) + "\n";
+    }
+    return data;
+  }
+}
+
+
+//Hash Map///////////////////////////
 class HashMap {
   constructor(initialCapacity=8) {
     this.length = 0;
