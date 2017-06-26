@@ -19,7 +19,6 @@ class HashMap {
     if (loadRatio > HashMap.MAX_LOAD_RATIO) {
       this._resize(this._capacity * HashMap.SIZE_RATIO);
     }
-//hash function returns the index where the key will be stored
     const index = this._findSlot(key);
     this._slots[index] = {
       key,
@@ -56,7 +55,6 @@ class HashMap {
   _resize(size) {
     const oldSlots = this._slots;
     this._capacity = size;
-        // Reset the length - it will get rebuilt as you add the items back
     this.length = 0;
     this._deleted = 0;
     this._slots = [];
@@ -93,51 +91,28 @@ let hashTable = new HashMap();
 hashArray.forEach(object => {
   let x = Object.keys(object).toString();
   hashTable.set(x, object[x]);
-  console.log(hashTable);
+//   console.log(hashTable);
 });
 
-//hashTable.set raccear = 'raccear'
-//let x = hashTable.get(raccear);
-//hashTable.set(rreaacc)
-//let y = hashTable.get(rreaacc);
-//if (x === y)return true else return false
-//TaChyla
-//alyhCaT
-//theoretically, the index returned should be the same reguardless of order.
-//not only is this false, if it were true it would be true for non palindromes as well.
-
-//initialize a new hash table
-//write each character into it
-//if there is more than one odd numbered character return false
-//else return true
-
-
-//can a hash table be useful here without continuous chaining?
-
 function checkPlaindrome (string) {
-  const letterCount = {};
   const hm = new HashMap();
-  let counts = [];
+  let letters = {};
   let sum = 0;
   let letter;
 
   for(let i = 0; i < string.length; i++){
     letter = string[i];
-    if(hm.get(letter) === undefined){
+    if(!(letter in letters)){
       hm.set(letter, 1);
-      letters.push(letter);
+      letters[letter] = 1;
     } else {
       let count = hm.get(letter);
       hm.set(letter, count+1);
     }
   }
 
-  for(let i = 0; i < string.length; i++){
-    counts.push(hm.get(string[i]));
-  }
-  
-  for(let i = 0; i < counts.legnth; i++){
-    if (counts[i] % 2 !== 0){
+  for(letter in letters){
+    if(hm.get(letter) % 2 !== 0){
       sum ++;
     }
   }
@@ -148,27 +123,5 @@ function checkPlaindrome (string) {
     return true;
   }
 
-
-  // for(let i = 0; i < string.length; i++){
-  //   letter = string[i];
-  //   if(letterCount[letter] > 0){
-  //     letterCount[letter]++;
-  //   } else {
-  //     letterCount[letter] = 1;
-  //   }
-  // }
-
-
-  // for (let count in letterCount){
-  //   let x = letterCount[count];
-  //   if(x % 2 !== 0){
-  //     sum ++;
-  //   }
-  // }
-  // if(sum > 1){
-  //   return false;
-  // } else {
-  //   return true;
-  // }
 }
-console.log(checkPlaindrome(''));
+console.log(checkPlaindrome('racecar'));
